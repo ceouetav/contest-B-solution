@@ -1,72 +1,85 @@
-# contest-B-solution
 #pragma GCC optimize("O3,unroll-loops")
 #pragma GCC target("avx2,bmi,bmi2,lzcnt,popcnt")
  
 #include <bits/stdc++.h>
 #include <set>
 using namespace std;
- 
-int main(){
-	std::ios::sync_with_stdio(false);
-	cin.tie(NULL);
-    int n;
-	int arr[n];
-    cin>>n;
-    int count=0;
-    for(int i=0;i<n;i++){
-    	cin>>arr[i];
-	}
-	int a=0;
-	for(int i=0;i<n;i++){
+
+long long dapan(long long a, long long arr[1000000]){
+	long long b;
+	long long count = 0;
+	for(long long i=a;i<b;i++){
 		if(arr[i]%2==0){
-		a++;	
+			count++;
 		}
 	}
-	if(a==n){
-		cout<<0;
-	}
-	int b=0;
-	for(int i=0;i<n;i++){
-		if(arr[i]%2!=0){
-		b++;	
+	long long emax = 0;
+	for(long long i=0;i<a;i++){
+		if(arr[i]%2==0&&arr[i]>emax){
+			emax = arr[i];
 		}
 	}
-	if(b==n){
-		cout<<0;
+	long long omax = 0;
+	for(long long i=0;i<a;i++){
+		if(arr[i]%2==1&&arr[i]>omax){
+			omax = arr[i];
+		}
 	}
-	for(int i=0;i<n;i++){
-		if(arr[i]%2==0)
-		count++;
-	}
-	return 0;
-	int omax=arr[0];
-    for(int i=0;i<n;i++){
-    	if(arr[i]%2!=0){
-        if(arr[i]>omax){
-            omax=arr[i];
-        }
-    }
-    }
-    int emax=arr[0];
-    for(int i=0;i<n;i++){
-    	if(arr[i]%2==0){
-        if(arr[i]>emax){
-            emax=arr[i];
-        }
-    }
-    }
-    int sum=0;
-    for (int i=0;i<n;i++){
+	long long sum=0;
+    for (long i=0;i<a;i++){
         if (arr[i]%2==0){
             sum += arr[i];
         }
     }
-    int countt=0;
-    for(int i=0;i<n;i++)
+	long long ecount=0;
+	for(long i=0;i<a;i++){
+		if(arr[i]%2==0){
+		ecount++;	
+		}
+	}
+	long long ocount=0;
+	for(long long i=0;i<a;i++){
+		if(arr[i]%2!=0){
+		ocount++;	
+		}
+	}
+	if(ecount==0||ocount==0){
+       return 0;
+	}
+	else{
+		long long sum=0;
+    for (int i=0;i<a;i++){
+        if (arr[i]%2==0){
+            sum += arr[i];
+        }
+    }
+    long long countt=0;
+    for(long long i=0;i<a;i++)
     	if(arr[i]>omax-emax+sum){
     		if(arr[i]%2==0){
     		countt++;
 		}
 	}
-	cout<<count+countt;
+	return count+countt;
 }
+	}
+	
+int main(){
+	std::ios::sync_with_stdio(false);
+	cin.tie(NULL);
+	long long a;
+	cin >> a;
+	long long ans[a-1];
+	for(long long i=0;i<a;i++){
+		long long sophantu;
+		cin >> sophantu;
+		long long arr[sophantu+1];
+	for(long long j=0;j<sophantu;j++){
+		cin >> arr[j];
+		}
+		ans[i] = dapan(sophantu,arr); 
+	}
+	for(long long i=0;i<a;i++){
+		cout << ans[i] << endl;
+	}
+}	
